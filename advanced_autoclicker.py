@@ -117,7 +117,7 @@ class ModernClickerGUI:
     def __init__(self, root):
         self.root = root
         self.root.title("🎮 AutoClicker PRO")
-        self.root.geometry("700x800")
+        self.root.geometry("700x1000")
         self.root.resizable(False, False)
         
         # Цветовая схема
