@@ -4,7 +4,7 @@ import random
 from pynput.mouse import Button, Controller
 from pynput.keyboard import Listener, KeyCode
 import tkinter as tk
-
+from tkinter import ttk
 
 class ModernAutoClicker:
     def __init__(self):
