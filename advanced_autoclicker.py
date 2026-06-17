@@ -347,7 +347,31 @@ class ModernClickerGUI:
                                  command=self.stop_clicking, bg=self.colors['danger'], fg='white',
                                  font=('Segoe UI', 14, 'bold'), relief='flat', padx=30, pady=15, cursor='hand2')
         self.stop_btn.pack(side='left', fill='both', expand=True, padx=(10, 0))
-        
+        # Кнопки профилей
+profile_frame = tk.Frame(parent, bg=self.colors['bg_primary'])
+profile_frame.pack(fill='x', pady=(10, 0))
+
+tk.Button(
+    profile_frame,
+    text="💾 Сохранить профиль",
+    command=lambda: self.autoclicker.save_profile(),
+    bg=self.colors['accent_primary'],
+    fg='white',
+    font=('Segoe UI', 10, 'bold'),
+    relief='flat',
+    cursor='hand2'
+).pack(side='left', fill='x', expand=True, padx=(0, 5))
+
+tk.Button(
+    profile_frame,
+    text="📂 Загрузить профиль",
+    command=self.load_profile_gui,
+    bg=self.colors['accent_secondary'],
+    fg='white',
+    font=('Segoe UI', 10, 'bold'),
+    relief='flat',
+    cursor='hand2'
+).pack(side='left', fill='x', expand=True, padx=(5, 0))
     def create_footer(self, parent):
         footer = tk.Frame(parent, bg=self.colors['bg_primary'])
         footer.pack(fill='x', pady=(15, 0))
@@ -416,7 +440,19 @@ class ModernClickerGUI:
             # В реальном проекте лучше использовать отдельные переменные для лейблов
             
         self.root.after(100, self.update_stats)
+def load_profile_gui(self):
+    if self.autoclicker.load_profile():
 
+        self.points_listbox.delete(0, tk.END)
+
+        for i, point in enumerate(self.autoclicker.click_points, start=1):
+            self.points_listbox.insert(
+                tk.END,
+                f"{i}. X={point[0]} Y={point[1]}"
+            )
+
+        self.update_stats()
+        self.status_label.config(text="Профиль загружен")
 if __name__ == "__main__":
     root = tk.Tk()
     app = ModernClickerGUI(root)
