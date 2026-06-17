@@ -5,7 +5,8 @@ from pynput.mouse import Button, Controller, Listener as MouseListener
 from pynput.keyboard import Listener as KeyboardListener, KeyCode, Key
 import tkinter as tk
 from tkinter import ttk
-
+import json
+from tkinter import filedialog, messagebox
 class ModernAutoClicker:
     def __init__(self):
         self.mouse = Controller()
@@ -97,7 +98,34 @@ class ModernAutoClicker:
     def clear_points(self):
         self.click_points.clear()
         self.current_point_index = 0
-    
+    def save_profile(self, filename="profile.json"):
+    data = {
+        "click_points": self.click_points,
+        "delay": self.delay,
+        "delay_variation": self.delay_variation,
+        "cycle_delay": self.cycle_delay,
+        "cycles": self.cycles
+    }
+
+    with open(filename, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=4)
+
+def load_profile(self, filename="profile.json"):
+    try:
+        with open(filename, "r", encoding="utf-8") as f:
+            data = json.load(f)
+
+        self.click_points = data.get("click_points", [])
+        self.delay = data.get("delay", 0.1)
+        self.delay_variation = data.get("delay_variation", 0.02)
+        self.cycle_delay = data.get("cycle_delay", 0.0)
+        self.cycles = data.get("cycles", 1)
+
+        return True
+
+    except Exception as e:
+        print(f"Ошибка загрузки профиля: {e}")
+        return False
     def on_press(self, key):
         if key == self.toggle_key:
             if self.clicking:
