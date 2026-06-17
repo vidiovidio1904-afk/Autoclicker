@@ -103,16 +103,16 @@ class ModernAutoClicker:
         "click_points": self.click_points,
         "delay": self.delay,
         "delay_variation": self.delay_variation,
-        "cycle_delay": self.cycle_delay,
-        "cycles": self.cycles
-    }
-
-    with open(filename, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=4)
-
-def load_profile(self, filename="profile.json"):
-    try:
-        with open(filename, "r", encoding="utf-8") as f:
+            "cycle_delay": self.cycle_delay,
+            "cycles": self.cycles
+        }
+    
+        with open(filename, "w", encoding="utf-8") as f:
+            json.dump(data, f, indent=4)
+    
+        def load_profile(self, filename="profile.json"):
+                try:
+            with open(filename, "r", encoding="utf-8") as f:
             data = json.load(f)
 
         self.click_points = data.get("click_points", [])
